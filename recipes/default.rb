@@ -3,6 +3,9 @@
 # Recipe:: default
 #
 # Copyright:: 2020, The Authors, All Rights Reserved.
+
+
+
 # package 'mongodb'
 
 bash 'install_mongod' do
@@ -15,6 +18,10 @@ bash 'install_mongod' do
   sudo systemctl restart mongod
   sudo systemctl enable mongod.service
   EOH
+end
+
+service 'mongod' do
+ action [:enable, :start]
 end
 
 # Arguabely less infrastructure agnostics (oposit of vendor lock-in) than chef syntax
@@ -32,12 +39,12 @@ end
 
 
 
-execute 'restart_mongod' do
-  command 'sudo systemctl restart mongod'
-  action :nothing
-end
-
-execute 'restart_mongod.service' do
-  command 'sudo systemctl enable mongod.service'
-  action :nothing
-end
+# execute 'restart_mongod' do
+#   command 'sudo systemctl restart mongodb'
+#   action :nothing
+# end
+#
+# execute 'restart_mongod.service' do
+#   command 'sudo systemctl enable mongodb.service'
+#   action :nothing
+# end
