@@ -13,17 +13,21 @@ describe 'mongodb::default' do
     platform 'ubuntu', '18.04'
 
     it 'converges successfully' do
-      expect { chef_run }.to_not raise_error
+       expect { chef_run }.to_not raise_error
     end
-  end
 
-  context 'When all attributes are default, on CentOS 7' do
-    # for a complete list of available platforms and versions see:
-    # https://github.com/chefspec/fauxhai/blob/master/PLATFORMS.md
-    platform 'centos', '7'
-
-    it 'converges successfully' do
-      expect { chef_run }.to_not raise_error
+    it 'should install MongodDB' do
+       expect(chef_run).to install_package 'mongodb'
     end
-  end
+
+    it 'should enable mongod service' do
+       expect(chef_run).to enable_service 'mongod'
+    end
+    it 'should start mongod service' do
+       expect(chef_run).to start_service 'mongod'
+    end
+   #  it 'mongo-org should be in source list' do
+   #   expect {is_expected.to render_file('etc/apt/source.list').with_content("mongo")}
+   # end
+ end
 end

@@ -10,7 +10,7 @@ name 'mongodb'
 default_source :supermarket
 
 # run_list: chef-client will run these recipes in the order specified.
-run_list 'mongodb_V3_ubuntu18::default'
+run_list 'mongodb_V3.2.20_ubuntu18::default'
 
 # Specify a custom source for a single cookbook:
-cookbook 'mongodb_V3_ubuntu18', path: '.'
+cookbook 'mongodb_V3.2.20_ubuntu18', path: '.'
